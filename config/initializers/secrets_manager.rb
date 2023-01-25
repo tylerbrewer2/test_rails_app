@@ -1,7 +1,6 @@
 # Responsible for pulling data from secrets manager
 
 def set_aws_managed_secrets
-  return false
   # secret name created in aws secret manager
   secret_name = "tf_rds_password"
   # region name
