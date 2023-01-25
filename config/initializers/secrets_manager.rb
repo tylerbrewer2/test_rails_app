@@ -1,6 +1,7 @@
 # Responsible for pulling data from secrets manager
 
 def set_aws_managed_secrets
+  return false
   # secret name created in aws secret manager
   secret_name = "tf_rds_password"
   # region name
@@ -24,3 +25,5 @@ def set_aws_managed_secrets
     ENV['DATABASE_URL'] = "postgres://postgres_user:#{response.secret_string}@terraform-20230124023517117300000001.ctbsli5wm9bg.us-east-1.rds.amazonaws.com:5432/tf_postgres_database"
   end
 end
+
+set_aws_managed_secrets
