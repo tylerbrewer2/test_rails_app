@@ -1,5 +1,7 @@
 FROM ruby:2.7.5
 
+EXPOSE 3000
+
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
 
@@ -10,6 +12,4 @@ RUN bundle install
 
 COPY . .
 
-CMD ["bundle exec puma -C config/puma.rb"]
-
-EXPOSE 3000
+CMD bundle exec puma -C config/puma.rb
