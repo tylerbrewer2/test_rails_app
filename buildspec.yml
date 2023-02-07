@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      ruby: 3.1
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    on-failure: ABORT
+    commands:
+      - docker build -t tf_test_rails_app .
+      - docker tag tf_test_rails_app:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/tf_test_rails_app:latest
+  post_build:
+    on-failure: ABORT
+    commands:
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/tf_test_rails_app:latest
