@@ -17,3 +17,6 @@ phases:
     on-failure: ABORT
     commands:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/tf_test_rails_app:latest
+      - printf '[{"name":"tf_test_rails_app","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/tf_test_rails_app:latest > imagedefinitions.json
+  artifacts:
+    files: imagedefinitons.json
